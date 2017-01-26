@@ -1,0 +1,9 @@
+Hello,
+I am the test FILE for the following program : UpLowConversion.
+My name may change later.
+
+Here is a random text for fun:
+
+akLKDSAdsfaasdSDjfdaFDSfdDSA
+
+later!
