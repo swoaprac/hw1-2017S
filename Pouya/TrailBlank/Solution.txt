@@ -1,0 +1,6 @@
+Current thoughts on how to solve this:
+  1. Make a buffer
+  2. Write function to save a line into buffer.
+  3. Write function to clean buffer from trailing blank spaces.
+  4. Print buffer.
+  5. Iterate through this until EOF.
