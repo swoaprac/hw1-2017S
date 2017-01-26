@@ -4,4 +4,4 @@ Current thoughts on how to solve this:
   3. Write function to clean buffer from trailing blank spaces.
   4. Print buffer.
   5. Iterate through this until EOF.        
-  5. Iterate through this until EOF.        
+

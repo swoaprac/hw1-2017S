@@ -48,19 +48,23 @@ getLine (char * str, FILE * src){
 
 void
 cleanBlank (char * str, int index){
-  while (isblank (str[index--]));
-  str[index + 1] = '\0';
+  if (index == 0){
+      str[0] = '\0';
+  }
+  else {
+    while (isblank (str[index--]));
+    str[index + 1] = '\0';
+  }
 }
 
 void
 cleanUp (FILE * src, FILE * des){
   char str[BUFFERSIZE];
   int index;
-  int counter = 0;
   while (STATE){
     index = getLine (str, src);
     cleanBlank(str, index);
     fprintf(des, "%s\n", str);
-    printf("%d\n", counter++);
+    printf("%d\t%d\n", STATE, index);
   }
 }
