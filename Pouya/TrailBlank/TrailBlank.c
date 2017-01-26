@@ -2,23 +2,37 @@
 */
 
 #include <stdio.h>
-
+#include <ctype.h>
 #define BUFFERSIZE 1000
+#define GO 1
+#define STOP 0
 
-int
+
+int static
+STATE = GO;
+
+int static
 getLine (char * str, FILE * src);
-int
-cleanBlank (int index);
+
+void
+cleanBlank (char * str, int index);
+
+void
+cleanUp (FILE * src, FILE * des);
 
 int
 main(int argc, char const *argv[]) {
-  /* code */
+  FILE * input = fopen ("Solution.txt", "r");
+  FILE * output = fopen ("Output.txt", "w");
+  cleanUp(input, output);
+  fclose (input);
+  fclose (output);
   return 0;
 }
 
 // note: in case space runs out, I have no idea what's gonna happen, I'll
 //    get there later.
-int
+int static
 getLine (char * str, FILE * src){
   int i;
   char c;
@@ -26,12 +40,27 @@ getLine (char * str, FILE * src){
   for(i = 0; i < BUFFERSIZE && (c = fgetc(src)) != '\n' && c != EOF; i++){
     str[i] = c;
   }
-  if (c == '\n'){
-    str[i++] == '\n';
+  if (c == EOF){
+    STATE = STOP;
   }
-  str[i++] == '\0';
-  // this is to know make things easier for the clearBlank function.
-  if (c == EOF)
-    return i - 1;
   return i;
+}
+
+void
+cleanBlank (char * str, int index){
+  while (isblank (str[index--]));
+  str[index + 1] = '\0';
+}
+
+void
+cleanUp (FILE * src, FILE * des){
+  char str[BUFFERSIZE];
+  int index;
+  int counter = 0;
+  while (STATE){
+    index = getLine (str, src);
+    cleanBlank(str, index);
+    fprintf(des, "%s\n", str);
+    printf("%d\n", counter++);
+  }
 }
