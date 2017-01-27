@@ -1,8 +1,3 @@
 #!/bin/bash
 
-awk -F','\
-'{
-	if ($3 == 2) { # Assignment is the third field
-		print $4
-	}
-}' $1 | sort | head -n 5
+awk -F',' '{if ($3 == 2) print $4}' $1 | sort -nr | head -n 5
