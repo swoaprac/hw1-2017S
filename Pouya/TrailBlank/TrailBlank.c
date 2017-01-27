@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <ctype.h>
+
 #define BUFFERSIZE 1000
 #define GO 1
 #define STOP 0
@@ -22,7 +23,7 @@ cleanUp (FILE * src, FILE * des);
 
 int
 main(int argc, char const *argv[]) {
-  FILE * input = fopen ("Solution.txt", "r");
+  FILE * input = fopen ("Input.txt", "r");
   FILE * output = fopen ("Output.txt", "w");
   cleanUp(input, output);
   fclose (input);
@@ -32,6 +33,7 @@ main(int argc, char const *argv[]) {
 
 // note: in case space runs out, I have no idea what's gonna happen, I'll
 //    get there later.
+// this funtion reads each line, and saves it in a buffer.
 int static
 getLine (char * str, FILE * src){
   int i;
@@ -46,17 +48,15 @@ getLine (char * str, FILE * src){
   return i;
 }
 
+//function clears blank space in the end of str
 void
 cleanBlank (char * str, int index){
-  if (index == 0){
-      str[0] = '\0';
-  }
-  else {
-    while (isblank (str[index--]));
+    while (isblank (str[--index]));
     str[index + 1] = '\0';
-  }
 }
 
+//this function combines getLine and cleanBlank. Also prints out our line
+//  into output file.
 void
 cleanUp (FILE * src, FILE * des){
   char str[BUFFERSIZE];
@@ -64,7 +64,8 @@ cleanUp (FILE * src, FILE * des){
   while (STATE){
     index = getLine (str, src);
     cleanBlank(str, index);
-    fprintf(des, "%s\n", str);
-    printf("%d\t%d\n", STATE, index);
+    if (STATE){
+      fprintf(des, "%s", str);
+    }
   }
 }
