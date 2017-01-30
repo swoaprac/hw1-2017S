@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <ctype.h>
 
+// Converts to a DOS, with just \n instead of \r\n at the end of lines
 void
-remove_trailing_blanks (FILE* in, FILE* out)
+convert_to_DOS (FILE* in, FILE* out)
 {
 	char c;
 	while ((c = fgetc (in)) != EOF){
@@ -17,7 +18,7 @@ main ()
 {
   FILE * in = fopen ("input", "r");
   FILE * out = fopen ("output", "w");
-  remove_trailing_blanks (in, out);
+  convert_to_DOS (in, out);
   fclose (in);
   fclose (out);
   return 0;
