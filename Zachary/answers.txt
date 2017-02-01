@@ -1,0 +1,30 @@
+- Given a DOS-formattted text file (lines end with \r\n rather than just \n)
+
+To convert a file from DOS format to normal text format, all you need to
+run is
+
+sed -i 's/\r\n/\n/g' FILENAME
+
+in terminal. This will edit the file directly. (1)
+
+
+
+Notes:
+
+(1) To write the output from sed to a new file (instead of editing in
+place), run the same replacement command without the '-i' flag and with
+the '> DESINATION' command instead. For example, for converting DOS to
+standard text format, you would run
+
+sed 's/\r\n/\n/g' SOURCE > DESINATION
+
+instead of
+
+sed -i 's/\r\n/\n/g' FILENAME
+
+Sources:
+Idea to use sed from:
+http://unix.stackexchange.com/questions/159367/using-sed-to-find-and-replace
+
+Information on writing from terminal
+https://www.digitalocean.com/community/tutorials/an-introduction-to-linux-i-o-redirection
