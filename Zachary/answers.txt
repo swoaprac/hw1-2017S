@@ -8,6 +8,10 @@ This will edit the file directly. (1)
 
 sed -i 's/\([[:upper]]\)/\L\1/g' FILENAME
 
+- Given a standard text file, remove all blank spaces at the ends of lines.
+
+sed -i 's/[[:space:]]*$//g'
+
 Notes:
 
 (1) To write the output from sed to a new file (instead of editing in
