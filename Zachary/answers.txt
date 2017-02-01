@@ -1,13 +1,12 @@
 - Given a DOS-formattted text file (lines end with \r\n rather than just \n)
 
-To convert a file from DOS format to normal text format, all you need to
-run is
-
 sed -i 's/\r\n/\n/g' FILENAME
 
-in terminal. This will edit the file directly. (1)
+This will edit the file directly. (1)
 
+- Given a standard text file, convert all uppercase letters to lowercase.
 
+sed -i 's/\([[:upper]]\)/\L\1/g' FILENAME
 
 Notes:
 
@@ -28,3 +27,6 @@ http://unix.stackexchange.com/questions/159367/using-sed-to-find-and-replace
 
 Information on writing from terminal
 https://www.digitalocean.com/community/tutorials/an-introduction-to-linux-i-o-redirection
+
+For information on sed
+https://www.gnu.org/software/sed/manual/sed.html#The-_0022s_0022-Command
