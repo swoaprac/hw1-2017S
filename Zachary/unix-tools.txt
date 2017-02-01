@@ -1,0 +1,14 @@
+grep - searches a file and prints lines matching a pattern
+head - output the first part of a file
+tail - output the last part of files
+sort - write sorted concatengation of all lines in file to Standard Output
+wc - print newline, word, and byte counts for each file
+cat - concatenate files and print on standard output
+--
+pushd/popd - pushd pushes a directory onto a stack of directories and moves
+you to that directory. popd removes the top directory on the stack and
+changes your location to that directory.
+sed - stream editor. Filters and transforms text. Useful commands
+    s/regexp/replacement(/g) - finds and replaces all examples of regex
+    with replacement. /g makes the replacement global
+    
