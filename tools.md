@@ -47,3 +47,10 @@ File Processing
 ---------------
 
 ### `tr` - change individual characters
+
+Word Processors (command line)
+------------------------------
+### `vi` 
+### `vim` - Vi IMproved
+### `emacs`
+### `nano`
