@@ -1,0 +1,51 @@
+Given a dos-formatted text file (lines end with \r\n rather than just \n),
+convert it to a standard text file.
+
+    sed -i 's/.$//'
+    Found on http://sed.sourceforge.net/sed1line.txt (retrieved
+    02/01/2017)
+
+Given a standard text file, convert all uppercase letters to lowercase.
+
+    tr '[:upper:]' '[:lower:]' < input.txt
+
+    alternatively, using vim: gg0guG (replace with capital U to convert to
+    uppercase)
+
+    Both solutions found on
+    https://unix.stackexchange.com/questions/171603/convert-file-contents-to-lower-case
+    (retrieved 02/01/2017)
+
+Given a standard text file, remove all blank spaces at the end of lines.
+
+    sed -i 's/[[:space:]]*$//'
+
+    Found on http://ask.xmodulo.com/remove-trailing-whitespaces-linux.html
+    (retrieved 02/01/2017)
+
+Make a list of all misspelled words in a text file
+
+    aspell --list < <file.txt>
+
+    Found out about aspell here:
+    https://unix.stackexchange.com/questions/207167/spelling-mistakes-in-the-file
+    (retrieved 02/01/2017). Devised command based on manpage for aspell
+
+Given a CSV file in which each line has the form LastName, FirstName,
+Assignment, NumericGrade find the the five highest grades on homework 2.
+
+    sort -k 4 | head -n 5
+
+Given an HTML file, find the URLs of all images.
+
+    grep -oi '<img[ ]*src="[^"]*"'']"'
+
+    Found base grep command on
+    https://stackoverflow.com/questions/9060099/getting-the-jpg-images-from-an-html-file
+    (retrieved 02/01/2017). Looked at grep manpage for -i to make it
+    case-insensitive
+
+    
+
+
+
