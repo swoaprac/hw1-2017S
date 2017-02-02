@@ -16,6 +16,7 @@ Extracting information about files
 ### `tail` - print the last ten lines of a file to stdout
 ### `cat` - print the contents of a file to stdout
 ### `sed` - finds and replaces a substring in a file
+### `awk` - programing language usable from the command lnie for text manipulation`
 
 File manipulation
 -----------------
