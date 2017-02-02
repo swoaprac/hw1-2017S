@@ -1,6 +1,11 @@
 Some Useful *nix Tools
 ======================
 
+Getting help
+------------
+
+### `man SUBJECT`
+
 Extracting information about files
 ----------------------------------
 
@@ -36,3 +41,8 @@ Navigation
 ### `popd` - removes the top directory on the stack of directories and
 ### changes your location to the next directory in the stack. Does nothing
 ### if no directories on the stack.
+
+File Processing
+---------------
+
+### `tr` - change individual characters
