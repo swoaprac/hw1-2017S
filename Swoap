@@ -1,0 +1,18 @@
+Coding Assignment:
+
+
+char * lowercase(char *Stu) {
+  if (!*str) { return *str; }
+  // Assuming ASCII encoded string
+  else if ( char[0] >= 'A' && char[0] <= 'Z' ) {
+    char[0] += ('a' - 'A');
+  }
+  return lowercase(str[1]);
+}
+```
+
+
+Useful tools
+mkdir
+tail 
+head
