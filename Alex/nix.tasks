@@ -20,6 +20,26 @@ char * lowercase(char *Stu) {
 * Given a CSV file in which each line has the form
     LastName,FirstName,Assignment,NumericGrade 
   find the the five highest grades on homework 2.
+```
+  lines = csv.parse(file)
+
+  top = []
+
+  for (ln,fn,an,ng) in lines:
+    if not an == 2:
+      continue
+    if len(top) < 5:
+      top.append((ln,fn,ng))
+    else:
+      for (l,f,n) in top:
+        if ng > n:
+          top.remove((l,f,n))
+          top.append((ln,fn,ng))
+          break
+  print(top)
+    
+```
+
 * Given an HTML file, find the URLs of all images. In case you don’t know HTML, those will typically look like 
     <img ... src="*URL*" ...>
   * The img can have any capitalization (img, IMG, Img, iMg, etc.)
