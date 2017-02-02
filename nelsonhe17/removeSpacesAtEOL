@@ -1,0 +1,3 @@
+#!/bin/bash
+python scripts/removeSpacesAtEOL.py $1
+

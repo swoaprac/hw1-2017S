@@ -1,0 +1,15 @@
+List of known *nix tools and short discriptions:
+
+man: documentation for bash commands and c functions
+du: tool to calculate disk usage
+grep: search for strings in files
+date: tool to display time and date
+time: tool to time programs and gives time breakdown
+top: task manager
+aspell: spellchecker
+less: file reader with scrolling
+cat: displays file contents
+head: displays first few lines
+tail: displays last few lines
+wget: tool to download webpages
+

@@ -1,0 +1,277 @@
+<!doctype html>
+<!-- saved from url=(0082)http://www.cs.grinnell.edu/~rebelsky/courses/csc282/2017s/assignments/simple-tasks -->
+<html lang="en"><head><meta http-equiv="content-type" content="text/html; charset=utf-8">
+  
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <title>some simple *nix tasks (thinking in c and unix)</title>
+  
+  <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">-->
+  <link rel="stylesheet" href="./text_files/bootstrap.min.css">
+  
+  <link rel="stylesheet" href="./text_files/theme.css">
+  <link rel="stylesheet" href="./text_files/theme-teal.css">
+  <link rel="stylesheet" href="./text_files/syntax.css">
+  <link rel="stylesheet" href="./text_files/print.css" media="print">
+  
+  <link rel="canonical" href="http://www.cs.grinnell.edu/~rebelsky/courses/csc282/2017s/~rebelsky/courses/csc282/2017s/assignments/simple-tasks.html">
+
+  <!-- html5 shim and respond.js for ie8 support of html5 elements and media queries -->
+  <!--[if lt ie 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+<style type="text/css">.mathjax_hover_frame {border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .25em; box-shadow: 0px 0px 15px #83a; -webkit-box-shadow: 0px 0px 15px #83a; -moz-box-shadow: 0px 0px 15px #83a; -khtml-box-shadow: 0px 0px 15px #83a; border: 1px solid #a6d ! important; display: inline-block; position: absolute}
+.mathjax_menu_button .mathjax_hover_arrow {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #aaa; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; -khtml-border-radius: 4px; font-family: 'courier new',courier; font-size: 9px; color: #f0f0f0}
+.mathjax_menu_button .mathjax_hover_arrow span {display: block; background-color: #aaa; border: 1px solid; border-radius: 3px; line-height: 0; padding: 4px}
+.mathjax_hover_arrow:hover {color: white!important; border: 2px solid #ccc!important}
+.mathjax_hover_arrow:hover span {background-color: #ccc!important}
+</style><style type="text/css">#mathjax_about {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #dddddd; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:dximagetransform.microsoft.dropshadow(offx=2, offy=2, color='gray', positive='true')}
+#mathjax_about.mathjax_mousepost {outline: none}
+.mathjax_menu {position: absolute; background-color: white; color: black; width: auto; padding: 5px 0px; border: 1px solid #cccccc; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 5px; -webkit-border-radius: 5px; -moz-border-radius: 5px; -khtml-border-radius: 5px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:dximagetransform.microsoft.dropshadow(offx=2, offy=2, color='gray', positive='true')}
+.mathjax_menuitem {padding: 1px 2em; background: transparent}
+.mathjax_menuarrow {position: absolute; right: .5em; padding-top: .25em; color: #666666; font-size: .75em}
+.mathjax_menuactive .mathjax_menuarrow {color: white}
+.mathjax_menuarrow.rtl {left: .5em; right: auto}
+.mathjax_menucheck {position: absolute; left: .7em}
+.mathjax_menucheck.rtl {right: .7em; left: auto}
+.mathjax_menuradiocheck {position: absolute; left: .7em}
+.mathjax_menuradiocheck.rtl {right: .7em; left: auto}
+.mathjax_menulabel {padding: 1px 2em 3px 1.33em; font-style: italic}
+.mathjax_menurule {border-top: 1px solid #dddddd; margin: 4px 3px}
+.mathjax_menudisabled {color: graytext}
+.mathjax_menuactive {background-color: #606872; color: white}
+.mathjax_menudisabled:focus, .mathjax_menulabel:focus {background-color: #e8e8e8}
+.mathjax_contextmenu:focus {outline: none}
+.mathjax_contextmenu .mathjax_menuitem:focus {outline: none}
+#mathjax_aboutclose {top: .2em; right: .2em}
+.mathjax_menu .mathjax_menuclose {top: -10px; left: -10px}
+.mathjax_menuclose {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #aaa; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; font-family: 'courier new',courier; font-size: 24px; color: #f0f0f0}
+.mathjax_menuclose span {display: block; background-color: #aaa; border: 1.5px solid; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; line-height: 0; padding: 8px 0 6px}
+.mathjax_menuclose:hover {color: white!important; border: 2px solid #ccc!important}
+.mathjax_menuclose:hover span {background-color: #ccc!important}
+.mathjax_menuclose:hover:focus {outline: none}
+</style><style type="text/css">.mathjax_preview .mjxf-math {color: inherit!important}
+</style><style type="text/css">.mjx_assistive_mathml {position: absolute!important; top: 0; left: 0; clip: rect(1px, 1px, 1px, 1px); padding: 1px 0 0 0!important; border: 0!important; height: 1px!important; width: 1px!important; overflow: hidden!important; display: block!important; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none}
+.mjx_assistive_mathml.mjx_assistive_mathml_block {width: 100%!important}
+</style><style type="text/css">#mathjax_zoom {position: absolute; background-color: #f0f0f0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box; box-shadow: 5px 5px 15px #aaaaaa; -webkit-box-shadow: 5px 5px 15px #aaaaaa; -moz-box-shadow: 5px 5px 15px #aaaaaa; -khtml-box-shadow: 5px 5px 15px #aaaaaa; filter: progid:dximagetransform.microsoft.dropshadow(offx=2, offy=2, color='gray', positive='true')}
+#mathjax_zoomoverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#mathjax_zoomframe {position: relative; display: inline-block; height: 0; width: 0}
+#mathjax_zoomeventtrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style><style type="text/css">.mathjax_preview {color: #888}
+#mathjax_message {position: fixed; left: 1em; bottom: 1.5em; background-color: #e6e6e6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#mathjax_msie_frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.mathjax_error {color: #cc0000; font-style: italic}
+</style><style type="text/css">.mjxp-script {font-size: .8em}
+.mjxp-right {-webkit-transform-origin: right; -moz-transform-origin: right; -ms-transform-origin: right; -o-transform-origin: right; transform-origin: right}
+.mjxp-bold {font-weight: bold}
+.mjxp-italic {font-style: italic}
+.mjxp-scr {font-family: mathjax_script,'times new roman',times,stixgeneral,serif}
+.mjxp-frak {font-family: mathjax_fraktur,'times new roman',times,stixgeneral,serif}
+.mjxp-sf {font-family: mathjax_sansserif,'times new roman',times,stixgeneral,serif}
+.mjxp-cal {font-family: mathjax_caligraphic,'times new roman',times,stixgeneral,serif}
+.mjxp-mono {font-family: mathjax_typewriter,'times new roman',times,stixgeneral,serif}
+.mjxp-largeop {font-size: 150%}
+.mjxp-largeop.mjxp-int {vertical-align: -.2em}
+.mjxp-math {display: inline-block; line-height: 1.2; text-indent: 0; font-family: 'times new roman',times,stixgeneral,serif; white-space: nowrap; border-collapse: collapse}
+.mjxp-display {display: block; text-align: center; margin: 1em 0}
+.mjxp-math span {display: inline-block}
+.mjxp-box {display: block!important; text-align: center}
+.mjxp-box:after {content: " "}
+.mjxp-rule {display: block!important; margin-top: .1em}
+.mjxp-char {display: block!important}
+.mjxp-mo {margin: 0 .15em}
+.mjxp-mfrac {margin: 0 .125em; vertical-align: .25em}
+.mjxp-denom {display: inline-table!important; width: 100%}
+.mjxp-denom > * {display: table-row!important}
+.mjxp-surd {vertical-align: top}
+.mjxp-surd > * {display: block!important}
+.mjxp-script-box > *  {display: table!important; height: 50%}
+.mjxp-script-box > * > * {display: table-cell!important; vertical-align: top}
+.mjxp-script-box > *:last-child > * {vertical-align: bottom}
+.mjxp-script-box > * > * > * {display: block!important}
+.mjxp-mphantom {visibility: hidden}
+.mjxp-munderover {display: inline-table!important}
+.mjxp-over {display: inline-block!important; text-align: center}
+.mjxp-over > * {display: block!important}
+.mjxp-munderover > * {display: table-row!important}
+.mjxp-mtable {vertical-align: .25em; margin: 0 .125em}
+.mjxp-mtable > * {display: inline-table!important; vertical-align: middle}
+.mjxp-mtr {display: table-row!important}
+.mjxp-mtd {display: table-cell!important; text-align: center; padding: .5em 0 0 .5em}
+.mjxp-mtr > .mjxp-mtd:first-child {padding-left: 0}
+.mjxp-mtr:first-child > .mjxp-mtd {padding-top: 0}
+.mjxp-mlabeledtr {display: table-row!important}
+.mjxp-mlabeledtr > .mjxp-mtd:first-child {padding-left: 0}
+.mjxp-mlabeledtr:first-child > .mjxp-mtd {padding-top: 0}
+.mjxp-merror {background-color: #ffff88; color: #cc0000; border: 1px solid #cc0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+.mjxp-scale0 {-webkit-transform: scalex(.0); -moz-transform: scalex(.0); -ms-transform: scalex(.0); -o-transform: scalex(.0); transform: scalex(.0)}
+.mjxp-scale1 {-webkit-transform: scalex(.1); -moz-transform: scalex(.1); -ms-transform: scalex(.1); -o-transform: scalex(.1); transform: scalex(.1)}
+.mjxp-scale2 {-webkit-transform: scalex(.2); -moz-transform: scalex(.2); -ms-transform: scalex(.2); -o-transform: scalex(.2); transform: scalex(.2)}
+.mjxp-scale3 {-webkit-transform: scalex(.3); -moz-transform: scalex(.3); -ms-transform: scalex(.3); -o-transform: scalex(.3); transform: scalex(.3)}
+.mjxp-scale4 {-webkit-transform: scalex(.4); -moz-transform: scalex(.4); -ms-transform: scalex(.4); -o-transform: scalex(.4); transform: scalex(.4)}
+.mjxp-scale5 {-webkit-transform: scalex(.5); -moz-transform: scalex(.5); -ms-transform: scalex(.5); -o-transform: scalex(.5); transform: scalex(.5)}
+.mjxp-scale6 {-webkit-transform: scalex(.6); -moz-transform: scalex(.6); -ms-transform: scalex(.6); -o-transform: scalex(.6); transform: scalex(.6)}
+.mjxp-scale7 {-webkit-transform: scalex(.7); -moz-transform: scalex(.7); -ms-transform: scalex(.7); -o-transform: scalex(.7); transform: scalex(.7)}
+.mjxp-scale8 {-webkit-transform: scalex(.8); -moz-transform: scalex(.8); -ms-transform: scalex(.8); -o-transform: scalex(.8); transform: scalex(.8)}
+.mjxp-scale9 {-webkit-transform: scalex(.9); -moz-transform: scalex(.9); -ms-transform: scalex(.9); -o-transform: scalex(.9); transform: scalex(.9)}
+.mathjax_phtml .noerror {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+</style></head>
+
+  <body><div id="mathjax_message" style="display: none;"></div>
+    <a href="http://www.cs.grinnell.edu/~rebelsky/courses/csc282/2017s/assignments/simple-tasks#content" class="sr-only sr-only-focusable">skip to main content</a>
+<nav class="navbar navbar-inverse">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <div class="navbar-brand"><a style="color: white;" href="http://www.cs.grinnell.edu/~rebelsky/courses/csc282/2017s/">thinking in c and unix</a><br>
+        <span class="subtitle">assignments</span>
+      </div>
+    </div> <!-- /.navbar-header -->
+    <div id="navbar" class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+          <a href="http://www.cs.grinnell.edu/~rebelsky/courses/csc282/2017s/assignments/simple-tasks#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">primary<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="http://www.cs.grinnell.edu/~rebelsky/courses/csc282/2017s/">front door</a></li>
+            <li><a href="http://www.cs.grinnell.edu/~rebelsky/courses/csc282/2017s/schedule">schedule</a></li>
+            <li><a href="http://www.cs.grinnell.edu/~rebelsky/courses/csc282/2017s/news">news</a></li>
+            <li><a href="http://www.cs.grinnell.edu/~rebelsky/courses/csc282/2017s/syllabus">syllabus</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="https://rebelsky.youcanbook.me/">book an appointment</a></li>
+
+            <li role="separator" class="divider"></li>
+            <li><a href="http://www.cs.grinnell.edu/~rebelsky/courses/csc282/2017s/handouts/academic-honesty">academic honesty</a></li>
+            <li><a href="http://www.cs.grinnell.edu/~rebelsky/courses/csc282/2017s/handouts/accessibility">accessibility</a></li>
+            <li><a href="http://www.cs.grinnell.edu/~rebelsky/courses/csc282/2017s/handouts/accommodations">accommodations and adjustments</a></li>
+            <li><a href="http://www.cs.grinnell.edu/~rebelsky/courses/csc282/2017s/handouts/email">email</a></li>
+            <li><a href="http://www.cs.grinnell.edu/~rebelsky/courses/csc282/2017s/handouts/faq">faq</a></li>
+            <li><a href="http://www.cs.grinnell.edu/~rebelsky/courses/csc282/2017s/handouts/teaching">teaching and learning</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="http://www.cs.grinnell.edu/~rebelsky/courses/csc282/2017s/assignments/simple-tasks#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">current<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="http://www.cs.grinnell.edu/~rebelsky/courses/csc282/2017s/assignments/current">current assignment</a></li>
+            <li><a href="http://www.cs.grinnell.edu/~rebelsky/courses/csc282/2017s/eboards/current">current eboard</a></li>
+            <li><a href="http://www.cs.grinnell.edu/~rebelsky/courses/csc282/2017s/exams/current">current exam</a></li>
+            <li><a href="http://www.cs.grinnell.edu/~rebelsky/courses/csc282/2017s/labs/current">current lab</a></li>
+            <li><a href="http://www.cs.grinnell.edu/~rebelsky/courses/csc282/2017s/outlines/current">current outline</a></li>
+            <li><a href="http://www.cs.grinnell.edu/~rebelsky/courses/csc282/2017s/readings/current">current reading</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="http://www.cs.grinnell.edu/~rebelsky/courses/csc282/2017s/assignments/simple-tasks#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">sections<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="http://www.cs.grinnell.edu/~rebelsky/courses/csc282/2017s/assignments/">assignments</a></li>
+            <li><a href="http://www.cs.grinnell.edu/~rebelsky/courses/csc282/2017s/eboards/">eboards</a></li>
+            <li><a href="http://www.cs.grinnell.edu/~rebelsky/courses/csc282/2017s/exams/">exams</a></li>
+            <li><a href="http://www.cs.grinnell.edu/~rebelsky/courses/csc282/2017s/labs/">labs</a></li>
+            <li><a href="http://www.cs.grinnell.edu/~rebelsky/courses/csc282/2017s/outlines/">outlines</a></li>
+            <li><a href="http://www.cs.grinnell.edu/~rebelsky/courses/csc282/2017s/readings/">readings</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="http://www.cs.grinnell.edu/~rebelsky/courses/csc282/2017s/handouts/reference/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">reference<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="http://www.cs.grinnell.edu/~rebelsky/courses/csc282/2017s/assignments/simple-tasks#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">related courses<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="http://www.cs.grinnell.edu/~rebelsky/courses/csc282/2017s/assignments/simple-tasks#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">misc<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="http://www.cs.grinnell.edu/~rebelsky/">samr</a></li>
+            <li><a href="http://www.cs.grinnell.edu/~rebelsky/glimmer/">glimmer labs</a></li>
+            <li><a href="http://www.cs.grinnell.edu/">grinnell cs</a></li>
+            <li><a href="http://www.grinnell.edu/">grinnell</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div> <!-- /.nav-collapse -->
+  </div><!-- /.container -->
+</nav>
+
+	  <div class="container content" id="content" tabindex="-1">
+	  <div class="row">
+  <div class="col-md-12">
+    <h1 id="some-simple-nix-tasks">some simple *nix tasks</h1>
+
+<p>note: the repository for this course is 
+<code class="highlighter-rouge">https://github.com/grinnell-csc282/hw1-2017s</code>.</p>
+
+<p>find good solutions to each of the following tasks.  (that
+is, write a program or command to solve the task.)  put them in a folder
+with your name in the github repository.</p>
+
+<ul>
+  <li>given a dos-formatted text file (lines end with \r\n rather than just
+\n), convert it to a standard text file.</li>
+  <li>given a standard text file, convert all uppercase letters to lowercase.</li>
+  <li>given a standard text file, remove all blank spaces at the end of lines.</li>
+  <li>make a list of all misspelled words in a text file.</li>
+  <li>given a csv file in which each line has the form<br>
+<code class="highlighter-rouge">lastname,firstname,assignment,numericgrade</code> <br>
+find the the five highest grades on homework 2.</li>
+  <li>given an html file, find the urls of all images.  in case you don’t
+know html, those will typically look like <br>
+<code class="highlighter-rouge">&lt;img ... src="*url*" ...&gt;</code>
+    <ul>
+      <li>the <code class="highlighter-rouge">img</code> can have any capitalization (<code class="highlighter-rouge">img</code>,
+<code class="highlighter-rouge">img</code>, <code class="highlighter-rouge">img</code>,  <code class="highlighter-rouge">img</code>, etc.)</li>
+      <li>there can be other text between the <code class="highlighter-rouge">img</code> and the
+<code class="highlighter-rouge">src</code>.  (that text cannot include a greater than sign.)</li>
+      <li>you may find it easier to start this problem by assuming that there’s only one image tag on a line.</li>
+    </ul>
+  </li>
+</ul>
+
+
+  </div> <!-- /col-md-12 -->
+</div> <!-- /row -->
+    <div class="row footer">
+  <div class="col-md-12">
+    <hr>
+    <p>
+      <a href="http://www.cs.grinnell.edu/~rebelsky/courses/csc282/2017s/handouts/accessibility">accessibility statement</a>.
+      check accessibility with <a href="http://wave.webaim.org/refer">wave</a>.
+    </p>
+    <p>
+  copyright © samuel a. rebelsky.  selected materials are design elements are due to other members of the grinnell cs department and are used with permission.
+</p>
+<p>
+  this work is licensed under a creative commons attribution 3.0 unported license. to view a copy of this license, visit http://creativecommons.org/licenses/by-nc/3.0/ or send a letter to creative commons, 543 howard street, 5th floor, san francisco, california, 94105, usa.
+</p>
+<p>
+  this website was built using <a href="http://jekyllrb.com/">jekyll</a>, <a href="http://getbootstrap.com/">twitter bootstrap</a>, and the <a href="https://bootswatch.com/cosmo/">bootswatch cosmo theme</a>.
+</p>
+
+  </div> <!-- /.col-md-12 -->
+</div> <!-- /.row -->
+<script src="./text_files/jquery.min.js"></script>
+<script src="./text_files/bootstrap.min.js"></script>
+<script src="./text_files/mathjax.js"></script>
+<script>
+$(document).ready(function() {
+  $("#markdown-toc a").on('click', function(e) {
+  	// prevent default anchor click behavior
+  	e.preventdefault();
+  	// animate
+  	$('html, body').animate({ scrolltop: $(this.hash).offset().top - 60 }, 300, function(){ });
+  })
+});
+</script>
+
+	  </div> <!-- /.container -->
+  
+
+</body></html>
