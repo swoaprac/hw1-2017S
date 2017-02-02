@@ -19,3 +19,8 @@ paste
 tail
 diff
 cmp
+
+
+Sources: 
+https://en.wikipedia.org/wiki/List_of_Unix_commands
+http://www.linfo.org/spell.html
