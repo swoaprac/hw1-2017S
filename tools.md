@@ -23,6 +23,9 @@ General tools
 ### `ps`  - Lists processes running on machine
 ### `history X` - prints the last X commands, is searchable by adding a term after the number of commands
 ### `xkill` - kill a process with THE CLICK OF DEATH
+### `du` - Check disk usage
+### `man` - documentation for Unix tools and C functions (The most important tool)
+### `wget` - tool for downloading webpages
 
 Navigation
 ----------
