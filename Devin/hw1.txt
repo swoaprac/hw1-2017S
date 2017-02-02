@@ -1,0 +1,45 @@
+----------------
+3 Hours spent
+----------------
+
+Given a DOS-formatted text file (lines end with \r\n rather than just \n), convert it to a standard text file.
+> sed -i 's/\r\n/\n/g' file
+
+Given a standard text file, convert all uppercase letters to lowercase.
+> sed -i 's/[:upper:]/\L/g' file
+
+Given a standard text file, remove all blank spaces at the end of lines.
+> sed -i 's/\s*$//g' file
+
+Make a list of all misspelled words in a text file.
+> cat file | aspell list
+
+Given a CSV file in which each line has the form LastName,FirstName,Assignment,NumericGrade find the the five highest grades on homework 2.
+INCOMPLETE 
+> tail -c 3 file #returns last two characters of file
+
+Given an HTML file, find the URLs of all images. In case you don’t know HTML, those will typically look like <img ... src="*URL*" ...>
+The img can have any capitalization (img, IMG, Img, iMg, etc.)
+There can be other text between the img and the src. (That text cannot include a greater than sign.)
+You may find it easier to start this problem by assuming that there’s only one image tag on a line.
+INCOMPLETE
+> grep "src=" file # returns the lines with an image, can't figure out how to isolate the URL 
+
+List of Tools:
+sed: finds and replaces in a file
+cat: outputs a text file to the terminal
+aspell: spell checks a string or file
+tail: returns last 10 lines of a file
+head: returns first 10 lines of a file
+grep: searches a file for a pattern
+touch: creates a file
+mkdir: creates a directory
+rm: deletes a file
+ls: lists files in the current directory
+
+---Citations---
+Found out about sed from this thread: 
+http://stackoverflow.com/questions/525592/find-and-replace-inside-a-text-file-from-a-bash-command
+
+Found out about aspell from this blog post:
+http://go2linux.garron.me/command-line-spell-checker/

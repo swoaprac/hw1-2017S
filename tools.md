@@ -10,6 +10,7 @@ Extracting information about files
 ### `head` - print the first ten lines of a file to stdout
 ### `tail` - print the last ten lines of a file to stdout
 ### `cat` - print the contents of a file to stdout
+### `sed` - finds and replaces a substring in a file
 
 File manipulation
 -----------------
@@ -26,6 +27,7 @@ General tools
 ### `du` - Check disk usage
 ### `man` - documentation for Unix tools and C functions (The most important tool)
 ### `wget` - tool for downloading webpages
+### `echo` - prints out to the terminal
 
 Navigation
 ----------
