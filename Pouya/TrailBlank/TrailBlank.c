@@ -60,12 +60,11 @@ cleanBlank (char * str, int index){
 void
 cleanUp (FILE * src, FILE * des){
   char str[BUFFERSIZE];
-  int index;
+  int index = getLine(str, src);
+  cleanBlank(str, index);
   while (STATE){
+    printf(des, "%s", str);
     index = getLine (str, src);
     cleanBlank(str, index);
-    if (STATE){
-      fprintf(des, "%s", str);
-    }
   }
 }
