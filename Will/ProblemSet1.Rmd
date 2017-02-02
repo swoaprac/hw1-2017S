@@ -1,0 +1,63 @@
+---
+title: "ProblemSet1"
+author: "William Rebelsky"
+date: "February 1, 2017"
+output: html_document
+---
+
+```{r, message = FALSE}
+library(rvest)
+library(stringr)
+```
+
+#2Hours spent on coding, I have other classes
+
+###Given a DOS-formatted text file (lines end with \r\n rather than just \n), convert it to a standard text file.
+Assuming that I can get it into R, use str_replace_all
+```{r}
+file<-c("abc\r\ndef\r\ntexttestsarefun\r\n") 
+str_replace_all(file, "\\r", "" )
+```
+
+####Given a standard text file, convert all uppercase letters to lowercase.
+###Given a standard text file, remove all blank spaces at the end of lines.
+Assuming that there is no other reason for there to be 3 spaces, and that these come before the \\n:
+```{r}
+file<-c("abc        \ndef      \ntext tests are fun.  Aren't They?       \n") 
+str_replace_all(file, "\ \ \ (.+)\n","\n")
+```
+
+####Make a list of all misspelled words in a text file.
+
+###Given a CSV file find the the five highest grades on homework 2.
+Note that this is done through example due to time. (Figure out how to do something, then generalize)
+```{r}
+#Read the csv file
+students<-read.csv("~/students.csv")
+#Find the second homework
+Homework2<-subset(students,students$Assignment==2)
+#All we care about is the grades, so grab those
+grades<-Homework2[,4]
+#Sort the grades
+sortedgrades<-sort(grades,decreasing = TRUE)
+#Return the top 5
+sortedgrades[1:5]
+```
+
+###Given an HTML file, find the URLs of all images.
+Note that this is done through example due to time. (Figure out how to do something, then generalize)
+```{r}
+#Read the website
+ImageParse <- read_html("https://en.wikipedia.org/wiki/Unix")
+#create nodes for each image
+ImageNodes <- html_nodes(ImageParse, "img")
+#Get the important information without overwriting
+ImageUrls1<-str_replace(ImageNodes, ".*src=\"(.+)\"","\\1")
+ImageUrls2<-str_replace(ImageUrls1, "\ (.+)>","")
+ImageUrls3<-str_replace(ImageUrls2, "\\\"","")
+#Finish cleaning wikipedia's urls, if not wikipedia, may not need this
+ImageUrls<-str_replace(ImageUrls3, "//","")
+#Example
+ImageUrls[1]
+```
+
